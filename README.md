@@ -119,7 +119,7 @@ Todas em modo **sob demanda** (paga por requisição).
 
 No Learner Lab não é possível criar papéis IAM: use o **`LabRole`** em todas as Lambdas e na agenda do EventBridge, e o **`LabInstanceProfile`** no EC2.
 
-1. **VPC** — crie `pokemon-vpc` (`10.0.0.0/16`), `subnet-publica` (`10.0.1.0/24`) e `subnet-privada` (`10.0.2.0/24`), o Internet Gateway `pokemon-igw` e a route table `rt-publica` com `0.0.0.0/0 → pokemon-igw` associada à sub-rede pública. Crie o Security Group `sg-ec2-publico` com entrada 80 e 443.
+1. **VPC** — crie `pokemon-vpc` (`10.0.0.0/16`), `subnet-publica` (`10.0.1.0/24`) e `subnet-privada` (`10.0.2.0/24`), o Internet Gateway `pokemon-igw` e a route table `rt-publica` com `0.0.0.0/0 → pokemon-igw` associada à sub-rede pública. Crie o Security Group `ec2-publico-sg` com entrada 80 e 443.
 2. **Gateway Endpoint** — VPC → Endpoints → `com.amazonaws.us-east-1.dynamodb`, tipo Gateway, marcando a route table da sub-rede privada.
 3. **DynamoDB** — crie as 4 tabelas da seção acima, com *Default settings*.
 4. **Lambdas** — crie as 3 funções com o `LabRole` e cole o código da pasta `lambdas/`:
@@ -130,7 +130,7 @@ No Learner Lab não é possível criar papéis IAM: use o **`LabRole`** em todas
    - `PokemonAPI`: `GET /pokemons` e `GET /pokemons/{id}` → `GetPokemonData`.
    - `ApiPokemonBatalhas`: `POST /batalhas` e `GET /ranking` → `SalvarResultadoBatalha`.
 6. **S3 + front-end** — crie um bucket (ex.: `arena-pokemon-site-seunome`, acesso público bloqueado). Copie `.env.example` para `.env`, coloque as duas Invoke URLs e rode `./infra/deploy-frontend.sh nome-do-bucket` (no CloudShell ou na sua máquina).
-7. **EC2** — Amazon Linux 2023, `t2.micro`, `subnet-publica`, IP público ativado, `sg-ec2-publico`, perfil IAM `LabInstanceProfile`. Em *Advanced details → User data*, cole `infra/ec2-user-data.sh` com o nome do seu bucket. Depois, em **Elastic IPs**, aloque um IP e associe à instância.
+7. **EC2** — Amazon Linux 2023, `t2.micro`, `subnet-publica`, IP público ativado, `ec2-publico-sg`, perfil IAM `LabInstanceProfile`. Em *Advanced details → User data*, cole `infra/ec2-user-data.sh` com o nome do seu bucket. Depois, em **Elastic IPs**, aloque um IP e associe à instância.
 8. **EventBridge Scheduler** — crie a agenda `atualizar-catalogo` com `rate(7 days)`, alvo Lambda `SeedPokemonData`, papel `LabRole`.
 9. **Monitoramento** — no SNS, crie o tópico `alertas-arena` com assinatura por e-mail (confirme o e-mail recebido). No CloudWatch → Alarms, crie um alarme na métrica `Errors` das Lambdas (soma ≥ 1 em 5 min) que notifica o tópico.
 
