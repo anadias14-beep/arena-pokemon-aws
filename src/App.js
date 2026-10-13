@@ -4,7 +4,7 @@ import './App.css';
 // URLs dos dois API Gateway (HTTP API). Ficam no arquivo .env
 // (veja .env.example) e entram no código na hora do "npm run build".
 const POKEMON_API_URL = process.env.REACT_APP_POKEMON_API_URL
-  || 'https://dgu8gh4vkb.execute-api.us-east-1.amazonaws.com';
+  || 'https://y68j739zf6.execute-api.us-east-1.amazonaws.com';
 const BATALHAS_API_URL = process.env.REACT_APP_BATALHAS_API_URL || '';
 
 // 1. Dicionário de Golpes para todos os 151 Pokémons
