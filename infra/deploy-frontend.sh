@@ -11,7 +11,7 @@ if [ ! -f .env ]; then
   exit 1
 fi
 
-npm ci
+npm install --no-audit --no-fund
 npm run build
 
 # --delete remove do bucket arquivos antigos que não existem mais no build
