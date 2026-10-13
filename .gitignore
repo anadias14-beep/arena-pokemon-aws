@@ -1,0 +1,14 @@
+# dependências e build (são gerados pelo npm, não vão para o GitHub)
+/node_modules
+/build
+/coverage
+
+# variáveis de ambiente locais (URLs da API)
+.env
+.env.local
+
+# arquivos do sistema
+.DS_Store
+npm-debug.log*
+__pycache__/
+*.zip
