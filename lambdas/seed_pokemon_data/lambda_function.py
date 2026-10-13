@@ -65,7 +65,7 @@ def lambda_handler(event, context):
 
                 lote_catalogo.put_item(Item=tratado)
                 lote_bruto.put_item(Item={
-                    "id_pokemon": tratado["pokemonId"],
+                    "id_pokemon": str(pid),
                     "nome": tratado["name"],
                     "altura_dm": int(bruto.get("height") or 0),
                     "peso_hg": int(bruto.get("weight") or 0),
@@ -146,7 +146,7 @@ def normalizar_e_validar(bruto: dict, pid_esperado: int) -> dict:
         sprite = ""  # descarta URL suspeita em vez de rejeitar o Pokémon
 
     return {
-        "pokemonId": str(pid),
+        "pokemonId": pid,  # Number, igual à chave da tabela PokemonCatalog
         "name": nome.replace("-", " ").title(),  # "mr-mime" -> "Mr Mime"
         "type1": tipos[0],
         "type2": tipos[1] if len(tipos) > 1 else "",

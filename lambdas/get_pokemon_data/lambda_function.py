@@ -43,7 +43,7 @@ def lambda_handler(event, context):
         if not ID_REGEX.match(pid):
             return resposta(400, {"erro": "id inválido: use apenas números (ex.: /pokemons/25)"})
 
-        item = tabela.get_item(Key={"pokemonId": pid}).get("Item")
+        item = tabela.get_item(Key={"pokemonId": int(pid)}).get("Item")  # chave é Number
         if not item:
             return resposta(404, {"erro": f"Pokémon {pid} não encontrado no catálogo"})
         return resposta(200, item)

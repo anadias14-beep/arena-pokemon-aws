@@ -94,7 +94,7 @@ flowchart LR
 
 | Tabela | Chave | Guarda |
 |---|---|---|
-| `PokemonCatalog` | `pokemonId` (String) | Pokémon tratados, no formato que o jogo usa |
+| `PokemonCatalog` | `pokemonId` (Number) | Pokémon tratados, no formato que o jogo usa |
 | `TabelaPokemons` | `id_pokemon` (String) | Dados coletados (altura, peso, experiência), fonte e data da coleta |
 | `HistoricoBatalhas` | `partidaId` (String) + `dataHora` (String) | Cada partida jogada |
 | `RankingJogadores` | `jogadorId` (String) | Pontos, vitórias e partidas por jogador |
