@@ -4,6 +4,14 @@ Jogo web de batalhas Pokémon por turnos. O jogador escolhe uma arena, monta um 
 
 Projeto da disciplina **GCT0149 — Redes de Computadores (2026/1)**. O enunciado pede uma arquitetura AWS que **consuma dados de uma API pública, trate, armazene e exiba numa página web**, com a rede separando o que é público do que é interno.
 
+## Endereços atuais
+
+| Recurso | Endereço |
+|---|---|
+| Jogo (EC2 + Elastic IP) | http://98.91.143.33 |
+| PokemonAPI | https://9q9lgdwhbe.execute-api.us-east-1.amazonaws.com |
+| ApiPokemonBatalhas | https://7c9l8x73ba.execute-api.us-east-1.amazonaws.com |
+
 ## Arquitetura
 
 ```mermaid
